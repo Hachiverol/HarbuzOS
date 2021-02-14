@@ -26,6 +26,7 @@ case $confirm in
 		;;
 	*)
 		refindinstall # this is really not going to fucking work longterm bruh
+		;;
 }
 
 border
