@@ -32,14 +32,14 @@ esac
 
 fixboot ()
 {
-sed "s/archisobasedir.*/"rw\ root=UUID=$rootuuid\""/" /boot/refind_linux.conf > /boot/refind_linux.conf
+sed -i "s/archisobasedir.*/"rw\ root=UUID=$rootuuid\""/" /boot/refind_linux.conf
 }
 
 border
 echo "Stage 2 initiated succesfully"
 read -p "Insert Hostname: " hostdenominator
 read -p "Insert Username: " userdenominator
-rootuuid=$(blkid -s UUID -s TYPE| grep ext4 | sed -n 's/.*UUID=\"\([^\"]*\)\".*/\1/p')
+rootuuid=$(blkid -s UUID -s TYPE | grep ext4 | sed -n 's/.*UUID=\"\([^\"]*\)\".*/\1/p')
 echo "ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime"
 ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
 echo "hwclock --systohc"
