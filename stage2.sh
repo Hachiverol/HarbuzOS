@@ -14,32 +14,32 @@ echo -e "::1\tlocalhost"
 echo -e "127.0.0.1\t$hostdenominator.localdomain\t$hostdenominator"
 }
 
-refindinstall () #not again bruh
-{
-read -p "Would you like to execute refind-install?: " confirm
-case $confirm in
-	y | yes)
-		refind-install
-		;;
-	n | no)
-		echo "Assuming existing refind install"
-		;;
-	*)
-		refindinstall # this is really not going to fucking work longterm bruh
-		;;
-esac
-}
+#refindinstall () #not again bruh
+#{
+#read -p "Would you like to execute refind-install?: " confirm
+#case $confirm in
+#	y | yes)
+#		refind-install
+#		;;
+#	n | no)
+#		echo "Assuming existing refind install"
+#		;;
+#	*)
+#		refindinstall # this is really not going to fucking work longterm bruh
+#		;;
+#esac
+#}
 
-fixboot ()
-{
-sed -i "s/archisobasedir.*/"rw\ root=UUID=$rootuuid\""/" /boot/refind_linux.conf
-}
+#fixboot ()
+#{
+#sed -i "s/archisobasedir.*/"rw\ root=UUID=$rootuuid\""/" /boot/refind_linux.conf
+#}
 
 border
 echo "Stage 2 initiated succesfully"
 read -p "Insert Hostname: " hostdenominator
 read -p "Insert Username: " userdenominator
-rootuuid=$(blkid -s UUID -s TYPE | grep ext4 | sed -n 's/.*UUID=\"\([^\"]*\)\".*/\1/p')
+#rootuuid=$(blkid -s UUID -s TYPE | grep ext4 | sed -n 's/.*UUID=\"\([^\"]*\)\".*/\1/p')
 echo "ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime"
 ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
 echo "hwclock --systohc"
@@ -64,8 +64,8 @@ echo -e "User password\n"
 passwd $userdenominator
 border
 pacman -S refind --noconfirm
-refindinstall
-fixboot
+#refindinstall
+#fixboot
 border
 echo "Stage 2 completed."
 

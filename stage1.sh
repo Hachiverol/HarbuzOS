@@ -60,6 +60,9 @@ genfstab -U /mnt >> /mnt/etc/fstab
 border
 read -p "Enter chroot? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
 border
+sudo pacman -Sy refind os-prober
+lsblk
+refind-install --root /mnt
 checkforchroot
 
 
