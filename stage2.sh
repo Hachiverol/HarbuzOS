@@ -67,5 +67,9 @@ pacman -S refind --noconfirm
 #refindinstall
 #fixboot
 border
+echo "Installing networking dependencies..."
+pacman -S networkmanager dnsmasq bluez bluez-utils
+systemctl enable NetworkManager
+systemctl enable bluetooth
 echo "Stage 2 completed."
 
