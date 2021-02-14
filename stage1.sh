@@ -19,12 +19,10 @@ kernelandpacstrap ()
 	while [ -z $kerneltype ] || [ $kerneltype != 1 ] || [ $kerneltype != 2 ]; do
 		read -p "Do you want to use linux(1) or linux-zen(2)?: " kerneltype
 		if [ $kerneltype == 1 ]; then
-			#pacstrap /mnt base base-devel linux linux-headers linux-firmware
-			echo "linux"
+			pacstrap /mnt base base-devel linux linux-headers linux-firmware
 			break
 		elif [ $kerneltype == 2 ]; then
-			#pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware
-			echo "linux-zen"
+			pacstrap /mnt base base-devel linux-zen linux-zen-headers linux-firmware
 			break
 		fi
 	done
@@ -39,11 +37,11 @@ read -p "Would you like to execute stage 2?(y/n): " confirm
 case $confirm in
 	y | yes)		
 		echo "Entering chroot and executing stage 2..."
-		#arch-chroot /mnt bash <(curl -s URLPLACEHOLDER)
+		arch-chroot /mnt bash <(curl -s https://raw.githubusercontent.com/Hachiverol/HarbuzOS/main/stage2.sh)
 		;;
 	n | no)
 		echo "Entering chroot..."
-		#arch-chroot /mnt
+		arch-chroot /mnt
 		;;
 	*)
 		checkforchroot #NIGGA WHAT THE FUCK
@@ -58,7 +56,7 @@ border
 kernelandpacstrap
 border
 echo "Generating fstab file"
-#genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 border
 read -p "Enter chroot? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
 border
